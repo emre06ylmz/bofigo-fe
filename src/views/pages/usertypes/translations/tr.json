@@ -1,0 +1,12 @@
+{
+  "table": 
+  {
+      "header": 
+      {
+        "Id": "Id",
+        "Name": "İsim",
+        "Code": "Kod",
+        "Detail": "Detay"
+      }
+  }
+}

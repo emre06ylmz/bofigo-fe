@@ -1,0 +1,23 @@
+
+{
+    "global":
+    {
+        "header": 
+        {
+            "pages": 
+            {
+              "UserTypes": "User Types"
+            },
+            "lang": 
+            {
+                "language": "Language",
+                "tr": "Turkish",
+                "en": "English"
+            }
+        },
+        "buttons":{
+            "save": "Save",
+            "clear": "Clear"
+        }
+    }
+  }

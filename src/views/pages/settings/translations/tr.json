@@ -1,0 +1,17 @@
+{
+  "email": 
+  {
+      "form": 
+      {
+        "mailAddress": "Mail Adresi",
+        "mailPassword": "Mail Şifre",
+        "mailServer": "Mail Server",
+        "mailPort": "Mail Port",
+        "mailOrder": "Sipariş Maillerinin Gönderim Adresi",
+        "mailOther": "Diğer Maillerin Gönderim Adresi",
+        "mailAdmin": "Yönetici Mail Adresi 1",
+        "mailAdmin2": "Yönetici Mail Adresi 2",
+        "mailConnection": "Şifreli Bağlantı"  
+      }
+  }
+}

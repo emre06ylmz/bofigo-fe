@@ -1,0 +1,12 @@
+.panel-login-form-container {
+    width: 480px;
+    padding: 20px;
+    margin: 100px auto;
+}
+
+.panel-login-disclaim {
+    font-size: 13px;
+    color: #a9a9a9;
+    text-align: right;
+    padding: 0 20px;
+}

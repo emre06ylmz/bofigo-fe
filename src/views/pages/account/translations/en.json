@@ -1,0 +1,17 @@
+{
+  "profile": 
+  {
+      "form": 
+      {
+        "mailAddress": "Mail Address",
+        "mailPassword": "Mail Password",
+        "mailServer": "Mail Server",
+        "mailPort": "Mail Port",
+        "mailOrder": "Mail Address for Orders",
+        "mailOther": "Mail Address for Others",
+        "mailAdmin": "Admin Mail Address",
+        "mailAdmin2": "Admin Mail Address2",
+        "mailConnection": "Connection Type"  
+      }
+  }
+}
