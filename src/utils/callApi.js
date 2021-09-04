@@ -31,7 +31,7 @@ export default function callApi(params = {}) {
     },
     mode: 'cors',
     cache: 'no-cache',
-    credentials: 'same-origin',
+    withCredentials: true,
     credentials: 'include',
     body: JSON.stringify(apiParams.body),
   })
