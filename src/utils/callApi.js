@@ -29,7 +29,6 @@ export default function callApi(params = {}) {
       'Content-Type': 'application/json',
       ...apiParams.headers,
     },
-    mode: 'cors',
     cache: 'no-cache',
     withCredentials: true,
     credentials: 'include',
