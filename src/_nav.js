@@ -25,6 +25,14 @@ export default {
         {
           name: "Ürün Listesi",
           url: "/pages/product",
+        },
+        {
+          name: "Ürün Kategori Listesi",
+          url: "/pages/productcategory",
+        },
+        {
+          name: "Ürün Model Kodu Listesi",
+          url: "/pages/productmodelcode",
         }
       ],
     },

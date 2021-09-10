@@ -3,18 +3,41 @@ import { Form, Input, Select, Button, message } from 'antd';
 import callApi from '../../../../utils/callApi';
 import { ENDPOINT } from '../ProductPage';
 import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../../utils/formUtil';
+import { ENDPOINT as ENDPOINT_PRODUCTCATEGORY } from '../../productcategory/ProductCategoryPage';
+import { ENDPOINT as ENDPOINT_PRODUCTMODELCODE } from '../../productmodelcode/ProductModelCodePage';
 
 const { Option } = Select;
 
 export default function ProductUpdateForm(props) {
   const form = useRef(null);
 
+  const [loading, setLoading] = useState(false);
+
+  const [productCategoryList, setProductCategoryList] = useState([]);
+  const [productModelCodeList, setProductModelCodeList] = useState([]);
+
   function setFormValues(data) {
+    data.productCategoryId = data.productCategory.id;
+    data.productModelCodeId = data.productModelCode.id;
     form.current.resetFields();
     form.current.setFieldsValue(data);
   }
 
+  async function getData() {
+    try {
+      setLoading(true);
+      let productCategoryResponse = await callApi({ endpoint: ENDPOINT_PRODUCTCATEGORY });
+      setProductCategoryList(productCategoryResponse.data);
+
+      let productModelCodeResponse = await callApi({ endpoint: ENDPOINT_PRODUCTMODELCODE });
+      setProductModelCodeList(productModelCodeResponse.data);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
+    getData();
     setFormValues(props.data);
   }, []);
 
@@ -37,6 +60,21 @@ export default function ProductUpdateForm(props) {
 
   return (
     <Form {...FORM_ITEM_LAYOUT} ref={form} name="register" onFinish={onFinish} scrollToFirstError>
+      <Form.Item name="productCategoryId" label="Ürün Kategori">
+        <Select>
+          {productCategoryList.map((item, index) => {
+            return <Option value={item.id}>{item.name}</Option>;
+          })}
+        </Select>
+      </Form.Item>
+
+      <Form.Item name="productModelCodeId" label="Model Kodu">
+        <Select>
+          {productModelCodeList.map((item, index) => {
+            return <Option value={item.id}>{item.name}</Option>;
+          })}
+        </Select>
+      </Form.Item>
       <Form.Item
         name="name"
         label="Name"
@@ -64,10 +102,44 @@ export default function ProductUpdateForm(props) {
       </Form.Item>
 
       <Form.Item
-        name="cost"
-        label="Maliyet"
+        name="tax"
+        label="KDV"
+        rules={[
+          {
+            required: true,
+            message: 'Please input Tax!',
+          },
+        ]}
       >
-        <Input disabled/>
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="cargo"
+        label="Kargo"
+        rules={[
+          {
+            required: true,
+            message: 'Please input Kargo!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        name="barcode"
+        label="Barkod"
+        rules={[
+          {
+            required: true,
+            message: 'Please input Barcode!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item name="cost" label="Maliyet">
+        <Input disabled />
       </Form.Item>
 
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>

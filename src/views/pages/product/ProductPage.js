@@ -12,6 +12,10 @@ import ProductionForm from '../production/ProductionForm';
 import ProductionUpdateForm from '../production/ProductionUpdateForm';
 import ProductionList from '../production/ProducionPage';
 
+import DeliveryForm from '../delivery/DeliveryForm';
+import DeliveryUpdateForm from '../delivery/DeliveryUpdateForm';
+import DeliveryList from '../delivery/DeliveryPage';
+
 const ENDPOINT = '/api/product';
 
 const styles = {
@@ -40,17 +44,36 @@ export default function ProductPage(props) {
       dataIndex: 'name',
     },
     {
-      title: 'Açıklama',
-      dataIndex: 'explanation',
+      title: 'Barkod',
+      dataIndex: 'barcode',
+    },
+    {
+      title: 'Kategori',
+      dataIndex: 'productCategory',
+      render: productCategory => <div>{productCategory.name}</div>,
+    },
+    {
+      title: 'Model Kodu',
+      dataIndex: 'productModelCode',
+      render: productModelCode => <div>{productModelCode.name}</div>,
     },
     {
       title: 'Maliyet',
       dataIndex: 'cost_TL',
       render: (cost_TL, item) => (
         <div>
-          {item.cost_TL} TL - {item.cost_USD} USD - {item.cost_EURO} EURO
+          {item.cost_TL} TL {<br />} {item.cost_USD} USD {<br />} {item.cost_EURO} EURO
         </div>
       ),
+    },
+    {
+      title: 'Kargo',
+      dataIndex: 'cargo',
+      render: (cargo, item) => <div>{item.cargo} TL</div>,
+    },
+    {
+      title: 'KDV',
+      dataIndex: 'tax',
     },
   ];
 
@@ -73,6 +96,16 @@ export default function ProductPage(props) {
       render: (text, record) => (
         <Button type="primary" onClick={e => onProductionClick(record, e)}>
           Üretim
+        </Button>
+      ),
+    },
+    {
+      title: '',
+      dataIndex: 'delivery',
+      key: 'x',
+      render: (text, record) => (
+        <Button type="primary" onClick={e => onDeliveryClick(record, e)}>
+          Sevkiyat
         </Button>
       ),
     },
@@ -138,6 +171,14 @@ export default function ProductPage(props) {
     });
   }
 
+  function onDeliveryClick(record, event) {
+    setModalInfo({
+      visible: true,
+      type: 'DELIVERIES',
+      selected: record,
+    });
+  }
+
   function hideModal(e) {
     setModalInfo({ visible: false });
     getData();
@@ -189,10 +230,26 @@ export default function ProductPage(props) {
     });
   }
 
+  function onPostDeliveryClick() {
+    setModalInfo({
+      visible: true,
+      type: 'DELIVERIES_POST',
+      selected: modalInfo.selected,
+    });
+  }
+
   function onUpdateProductionClick(record) {
     setModalInfo({
       visible: true,
       type: 'PRODUCTIONS_UPDATE',
+      selected: record,
+    });
+  }
+
+  function onUpdateDeliveryClick(record) {
+    setModalInfo({
+      visible: true,
+      type: 'DELIVERIES_UPDATE',
       selected: record,
     });
   }
@@ -273,6 +330,18 @@ export default function ProductPage(props) {
         </Modal>
       )}
 
+      {modalInfo.type === 'DELIVERIES_POST' && (
+        <Modal
+          width={600}
+          visible={modalInfo.visible}
+          title="Sevkiyat Ekleme Ekranı"
+          onCancel={hideModal}
+          footer={null}
+        >
+          <DeliveryForm data={modalInfo.selected} handleClose={hideModal} />
+        </Modal>
+      )}
+
       {modalInfo.type === 'PRODUCTIONS_UPDATE' && (
         <Modal
           width={600}
@@ -285,11 +354,34 @@ export default function ProductPage(props) {
         </Modal>
       )}
 
+      {modalInfo.type === 'DELIVERIES_UPDATE' && (
+        <Modal
+          width={600}
+          visible={modalInfo.visible}
+          title="Sevkiyar Güncelleme Ekranı"
+          onCancel={hideModal}
+          footer={null}
+        >
+          <DeliveryUpdateForm data={modalInfo.selected} handleClose={hideModal} />
+        </Modal>
+      )}
+
       {modalInfo.type === 'PRODUCTIONS' && (
         <Modal width={600} visible={modalInfo.visible} title="Üretim Listesi" onCancel={hideModal} footer={null}>
           <ProductionList
             onUpdateClick={onUpdateProductionClick}
             onPostClick={onPostProductionClick}
+            data={modalInfo.selected}
+            handleClose={hideModal}
+          />
+        </Modal>
+      )}
+
+      {modalInfo.type === 'DELIVERIES' && (
+        <Modal width={600} visible={modalInfo.visible} title="Sekiyat Listesi" onCancel={hideModal} footer={null}>
+          <ProductionList
+            onUpdateClick={onUpdateDeliveryClick}
+            onPostClick={onPostDeliveryClick}
             data={modalInfo.selected}
             handleClose={hideModal}
           />

@@ -32,8 +32,11 @@ import RawMaterialPage from "./pages/rawmaterial/RawMaterialPage";
 import UnitPage from "./pages/unit/UnitPage";
 import SupplierPage from "./pages/supplier/SupplierPage";
 import PurchasePage from "./pages/purchase/PurchasePage";
+import ProductCategoryPage from "./pages/productcategory/ProductCategoryPage";
+import ProductModelCodePage from "./pages/productmodelcode/ProductModelCodePage";
 import ProductPage from "./pages/product/ProductPage";
 import ProductionPage from "./pages/production/ProducionPage";
+import DeliveryPage from "./pages/delivery/DeliveryPage";
 
 // See React Router documentation for details: https://reacttraining.com/react-router/web/api/Route
 const pageList = [
@@ -73,9 +76,24 @@ const pageList = [
     component: ProductPage
   },
   {
+    name: "Ürün Kategori Listesi",
+    path: "/pages/productcategory",
+    component: ProductCategoryPage
+  },
+  {
+    name: "Ürün Model Kodu Listesi",
+    path: "/pages/productmodelcode",
+    component: ProductModelCodePage
+  },
+  {
     name: "Üretiim Listesi",
     path: "/pages/production",
     component: ProductionPage
+  },
+  {
+    name: "Sevkiyat Listesi",
+    path: "/pages/delivery",
+    component: DeliveryPage
   },
   {
     name: "Üyeler",
