@@ -84,7 +84,7 @@ export default function ProductPage(props) {
       dataIndex: 'rawMaterial',
       key: 'x',
       render: (text, record) => (
-        <Button type="primary" onClick={e => onRawMaterialClick(record, e)}>
+        <Button type="link" onClick={e => onRawMaterialClick(record, e)}>
           Hammaddeler
         </Button>
       ),
@@ -94,7 +94,7 @@ export default function ProductPage(props) {
       dataIndex: 'production',
       key: 'x',
       render: (text, record) => (
-        <Button type="primary" onClick={e => onProductionClick(record, e)}>
+        <Button type="link" onClick={e => onProductionClick(record, e)}>
           Üretim
         </Button>
       ),
@@ -104,7 +104,7 @@ export default function ProductPage(props) {
       dataIndex: 'delivery',
       key: 'x',
       render: (text, record) => (
-        <Button type="primary" onClick={e => onDeliveryClick(record, e)}>
+        <Button type="link" onClick={e => onDeliveryClick(record, e)}>
           Sevkiyat
         </Button>
       ),
