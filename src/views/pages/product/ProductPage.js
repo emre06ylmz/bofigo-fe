@@ -75,6 +75,10 @@ export default function ProductPage(props) {
       title: 'KDV',
       dataIndex: 'tax',
     },
+    {
+      title: 'Stok',
+      dataIndex: 'stock',
+    },
   ];
 
   const manager_columns = [
@@ -379,7 +383,7 @@ export default function ProductPage(props) {
 
       {modalInfo.type === 'DELIVERIES' && (
         <Modal width={600} visible={modalInfo.visible} title="Sekiyat Listesi" onCancel={hideModal} footer={null}>
-          <ProductionList
+          <DeliveryList
             onUpdateClick={onUpdateDeliveryClick}
             onPostClick={onPostDeliveryClick}
             data={modalInfo.selected}
