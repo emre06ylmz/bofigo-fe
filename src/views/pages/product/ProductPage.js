@@ -58,13 +58,21 @@ export default function ProductPage(props) {
       render: productModelCode => <div>{productModelCode.name}</div>,
     },
     {
+      title: 'Stok',
+      dataIndex: 'stock',
+    },
+    {
       title: 'Maliyet',
       dataIndex: 'cost_TL',
       render: (cost_TL, item) => (
         <div>
-          {item.cost_TL} TL {<br />} {item.cost_USD} USD {<br />} {item.cost_EURO} EURO
+          {item.cost_TL} TL
         </div>
       ),
+    },
+    {
+      title: 'KDV',
+      dataIndex: 'tax',
     },
     {
       title: 'Kargo',
@@ -72,12 +80,13 @@ export default function ProductPage(props) {
       render: (cargo, item) => <div>{item.cargo} TL</div>,
     },
     {
-      title: 'KDV',
-      dataIndex: 'tax',
-    },
-    {
-      title: 'Stok',
-      dataIndex: 'stock',
+      title: 'Toplam Maliyet',
+      dataIndex: 'cost_TL',
+      render: (cost_TL, item) => (
+        <div>
+          {item.cost_Total} TL
+        </div>
+      ),
     },
   ];
 
