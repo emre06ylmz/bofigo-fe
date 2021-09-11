@@ -138,8 +138,17 @@ export default function ProductUpdateForm(props) {
         <Input />
       </Form.Item>
 
-      <Form.Item name="cost" label="Maliyet">
-        <Input disabled />
+      <Form.Item
+        name="stock"
+        label="Stok"
+        rules={[
+          {
+            required: true,
+            message: 'Please input Stok!',
+          },
+        ]}
+      >
+        <Input />
       </Form.Item>
 
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
