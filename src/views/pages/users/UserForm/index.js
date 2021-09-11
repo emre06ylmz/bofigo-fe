@@ -38,7 +38,7 @@ export default function UserForm(props) {
         getUserTypes();
       }
     } catch (error) {
-      message.error(error && error.messages);
+      //message.error(error && error.messages);
     }
   }
 

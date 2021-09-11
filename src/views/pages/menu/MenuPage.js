@@ -83,7 +83,7 @@ export default function MenuMage() {
        }
         
     } catch (error) {
-      message.error(error.toString());
+      //message.error(error.toString());
     }
   }
 

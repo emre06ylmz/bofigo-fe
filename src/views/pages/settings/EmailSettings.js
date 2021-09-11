@@ -30,7 +30,7 @@ export function EmailSettings(props) {
         setFormValues(response);
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 
@@ -46,7 +46,7 @@ export function EmailSettings(props) {
         getEmailData();
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 

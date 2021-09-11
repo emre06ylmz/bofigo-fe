@@ -59,7 +59,7 @@ export default function RawMaterialForm(props) {
         props.handleClose();
       }
     } catch (error) {
-      message.error(error && error.messages);
+      //message.error(error && error.messages);
     }
   }
 

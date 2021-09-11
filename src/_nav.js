@@ -22,6 +22,12 @@ export default {
           name: "Tedarikçi Listesi",
           url: "/pages/supplier",
         },
+      ],
+    },
+    {
+      name: "Ürün Yönetimi",
+      icon: "Layers",
+      children: [
         {
           name: "Ürün Listesi",
           url: "/pages/product",

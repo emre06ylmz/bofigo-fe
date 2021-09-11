@@ -23,7 +23,7 @@ export function CurrencySettings(props) {
         setFormValues(response.data[0]);
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 
@@ -39,7 +39,7 @@ export function CurrencySettings(props) {
         getCurrencyData();
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 

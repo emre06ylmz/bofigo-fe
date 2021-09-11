@@ -17,14 +17,6 @@ import MenuPage from "./pages/menu/MenuPage";
 import EmailSettings from "./pages/settings/EmailSettings";
 import CurrencySettings from "./pages/settings/CurrencySettings";
 import IyzicoSettings from "./pages/settings/IyzicoSettings";
-import BrandPage from "./pages/brand/BrandPage";
-import BrandPostForm from "./pages/brand/BrandPostForm/BrandPostForm";
-import BrandUpdateForm from "./pages/brand/BrandUpdateForm/BrandUpdateForm";
-import CategoryPage from "./pages/category/CategoryPage";
-import CategoryPostForm from "./pages/category/CategoryPostForm/CategoryPostForm";
-import CategoryUpdateForm from "./pages/category/CategoryUpdateForm/CategoryUpdateForm";
-import OptionsPage from "./pages/options/OptionsPage";
-import Properties from "./pages/properties/Properties";
 import ProfilePage from "./pages/account/ProfilePage";
 
 import RawMaterialCategoryPage from "./pages/rawmaterialcategory/RawMaterialCategoryPage";
@@ -134,46 +126,6 @@ const pageList = [
     name: "Blank",
     path: "/pages/blank",
     component: BlankPage
-  },
-  {
-    name: "Kategori",
-    path: "/pages/categories",
-    component: CategoryPage
-  },
-  {
-    name: "Yeni Kategori Ekleme",
-    path: "/pages/category/add",
-    component: CategoryPostForm
-  },
-  {
-    name: "Kategori Güncelleme",
-    path: "/pages/category/update/:id",
-    component: CategoryUpdateForm
-  },
-  {
-    name: "Brands",
-    path: "/pages/brands",
-    component: BrandPage
-  },
-  {
-    name: "Yeni Marka Ekleme",
-    path: "/pages/brand/add",
-    component: BrandPostForm
-  },
-  {
-    name: "Marka Güncelleme",
-    path: "/pages/brand/update/:id",
-    component: BrandUpdateForm
-  },
-  {
-    name: "Options",
-    path: "/pages/options",
-    component: OptionsPage
-  },
-  {
-    name: "Properties",
-    path: "/pages/properties",
-    component: Properties
   },
   {
     name: "Sub Navigation",

@@ -21,7 +21,7 @@ export default function ProductCategoryForm(props) {
         props.handleClose();
       }
     } catch (error) {
-      message.error(error && error.messages);
+      //message.error(error && error.messages);
     }
   }
 

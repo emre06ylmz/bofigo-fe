@@ -107,7 +107,7 @@ export default function RawMaterialPage(props) {
         message.success('Kayıt Başarılı Şekilde Silindi.');
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 

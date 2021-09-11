@@ -40,7 +40,7 @@ export default function ProductRawMaterialForm(props) {
         message.success('Kayıt Başarılı Şekilde Silindi.');
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 

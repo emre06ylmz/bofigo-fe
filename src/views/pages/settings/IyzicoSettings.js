@@ -23,7 +23,7 @@ export default function IyzicoSettings(props) {
         setFormValues(response);
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 
@@ -39,7 +39,7 @@ export default function IyzicoSettings(props) {
         getData();
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 

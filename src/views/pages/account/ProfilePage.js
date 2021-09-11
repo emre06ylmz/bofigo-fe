@@ -29,7 +29,7 @@ export function ProfilePage(props) {
         setFormValues(response);
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 
@@ -45,7 +45,7 @@ export function ProfilePage(props) {
         getProfileData();
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   }
 

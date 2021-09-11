@@ -42,7 +42,7 @@ export default function MenuUpdateForm(props) {
         props.handleClose();
       }
     } catch (error) {
-      message.error(error.messages);
+      //message.error(error.messages);
     }
   };
 

@@ -30,7 +30,7 @@ export default function MenuForm(props) {
         props.handleClose();
       }
     } catch (error) {
-      message.error(error.toString());
+      //message.error(error.toString());
     }
   };
 

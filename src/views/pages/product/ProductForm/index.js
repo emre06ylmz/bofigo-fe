@@ -36,6 +36,7 @@ export default function ProductForm(props) {
     values.cost_TL = 0;
     values.cost_USD = 0;
     values.cost_EURO = 0;
+    values.stock = 0;
     try {
       let response = await callApi({
         endpoint: ENDPOINT,
@@ -47,7 +48,7 @@ export default function ProductForm(props) {
         props.handleClose();
       }
     } catch (error) {
-      message.error(error && error.messages);
+      //message.error(error && error.messages);
     }
   }
 
