@@ -130,6 +130,18 @@ export default function ProductForm(props) {
       >
         <Input />
       </Form.Item>
+      <Form.Item
+        name="stock"
+        label="Stok"
+        rules={[
+          {
+            required: true,
+            message: 'Please input Stok!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
 
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
         <Button type="primary" htmlType="submit">

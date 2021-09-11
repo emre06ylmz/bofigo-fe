@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Form, Input, Select, Button, message, Popconfirm, Table } from 'antd';
 import callApi from '../../../utils/callApi';
 import { Fragment } from 'react';
-import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../utils/formUtil';
-import { ENDPOINT as ENDPOINT_RAWMATERIALCATEGORY } from '../rawmaterialcategory/RawMaterialCategoryPage';
 import { ENDPOINT as ENDPOINT_RAWMATERIAL } from '../rawmaterial/RawMaterialPage';
 
 const { Option } = Select;

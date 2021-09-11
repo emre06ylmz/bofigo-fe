@@ -4,10 +4,9 @@ import callApi from '../../../../utils/callApi';
 import { Fragment } from 'react';
 import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../../utils/formUtil';
 import { ENDPOINT as ENDPOINT_PRODUCT } from '../../product/ProductPage';
+import { ENDPOINT } from '../DeliveryPage';
 
 const { Option } = Select;
-
-const ENDPOINT = '/api/production';
 
 export default function ProductRawMaterialForm(props) {
   const form = useRef(null);
