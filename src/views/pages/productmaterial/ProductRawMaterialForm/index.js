@@ -5,10 +5,9 @@ import { Fragment } from 'react';
 import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../../utils/formUtil';
 import { ENDPOINT as ENDPOINT_RAWMATERIALCATEGORY } from '../../rawmaterialcategory/RawMaterialCategoryPage';
 import { ENDPOINT as ENDPOINT_RAWMATERIAL } from '../../rawmaterial/RawMaterialPage';
+import { ENDPOINT } from '../ProductRawMaterialPage';
 
 const { Option } = Select;
-
-const ENDPOINT = '/api/productmaterial';
 
 export default function ProductRawMaterialForm(props) {
   const form = useRef(null);

@@ -3,7 +3,7 @@ import { Form, Input, Select, Button, message } from 'antd';
 import callApi from '../../../../utils/callApi';
 import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../../utils/formUtil';
 import { ENDPOINT as ENDPOINT_PRODUCT } from '../../product/ProductPage';
-const ENDPOINT = '/api/production';
+import { ENDPOINT } from '../DeliveryPage';
 
 const { Option } = Select;
 
