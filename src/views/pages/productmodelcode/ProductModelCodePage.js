@@ -135,13 +135,13 @@ export default function ProductModelCodePage(props) {
   return (
     <React.Fragment>
       <Button type="primary" onClick={onPostClick}>
-        Hammadde Kategori Ekle
+      Ürüm Model Kodu Ekle
       </Button>
       <Table loading={loading} dataSource={items} columns={manager_columns} />
       {modalInfo.type === "POST" && (
         <Modal
           visible={modalInfo.visible}
-          title="Hammadde Kategori Ekleme Ekranı"
+          title="Ürüm Model Kodu Ekleme Ekranı"
           onCancel={hideModal}
           footer={null}
         >
@@ -152,7 +152,7 @@ export default function ProductModelCodePage(props) {
       {modalInfo.type === "UPDATE" && (
         <Modal
           visible={modalInfo.visible}
-          title="Hammadde Kategori Güncelleme Ekranı"
+          title="Ürüm Model Kodu Güncelleme Ekranı"
           onCancel={hideModal}
           footer={null}
         >

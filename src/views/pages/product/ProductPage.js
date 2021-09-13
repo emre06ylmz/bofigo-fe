@@ -16,6 +16,8 @@ import DeliveryForm from '../delivery/DeliveryForm';
 import DeliveryUpdateForm from '../delivery/DeliveryUpdateForm';
 import DeliveryList from '../delivery/DeliveryPage';
 
+import { financial } from '../../../utils/formUtil';
+
 const ENDPOINT = '/api/product';
 
 const styles = {
@@ -64,29 +66,31 @@ export default function ProductPage(props) {
     {
       title: 'Maliyet',
       dataIndex: 'cost_TL',
-      render: (cost_TL, item) => (
-        <div>
-          {item.cost_TL} TL
-        </div>
-      ),
+      render: (cost_TL, item) => <div>{item.cost_TL} TL</div>,
+    },
+    {
+      title: '%5 Fireli Maliyet',
+      dataIndex: 'cost_TL',
+      render: (cost_TL, item) => <div>{item.cost_Plus} TL</div>,
     },
     {
       title: 'KDV',
       dataIndex: 'tax',
     },
     {
+      title: 'Fireli KDV Dahil Maliyet',
+      dataIndex: 'cost_TL',
+      render: (cost_TL, item) => <div>{financial(item.cost_PlusTax)} TL</div>,
+    },
+    {
       title: 'Kargo',
       dataIndex: 'cargo',
-      render: (cargo, item) => <div>{item.cargo} TL</div>,
+      render: (cargo, item) => <div>{financial(item.cargo)} TL</div>,
     },
     {
       title: 'Toplam Maliyet',
       dataIndex: 'cost_TL',
-      render: (cost_TL, item) => (
-        <div>
-          {item.cost_Total} TL
-        </div>
-      ),
+      render: (cost_TL, item) => <div>{financial(item.cost_Total)} TL</div>,
     },
   ];
 
@@ -380,7 +384,7 @@ export default function ProductPage(props) {
       )}
 
       {modalInfo.type === 'PRODUCTIONS' && (
-        <Modal width={600} visible={modalInfo.visible} title="Üretim Listesi" onCancel={hideModal} footer={null}>
+        <Modal width={1000} visible={modalInfo.visible} title="Üretim Listesi" onCancel={hideModal} footer={null}>
           <ProductionList
             onUpdateClick={onUpdateProductionClick}
             onPostClick={onPostProductionClick}
@@ -391,7 +395,7 @@ export default function ProductPage(props) {
       )}
 
       {modalInfo.type === 'DELIVERIES' && (
-        <Modal width={600} visible={modalInfo.visible} title="Sekiyat Listesi" onCancel={hideModal} footer={null}>
+        <Modal width={1000} visible={modalInfo.visible} title="Sekiyat Listesi" onCancel={hideModal} footer={null}>
           <DeliveryList
             onUpdateClick={onUpdateDeliveryClick}
             onPostClick={onPostDeliveryClick}

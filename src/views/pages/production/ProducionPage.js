@@ -32,6 +32,22 @@ export default function ProductionPage(props) {
       title: 'Miktar',
       dataIndex: 'count',
     },
+    {
+      title: 'Giriş Yapan',
+      dataIndex: 'createdBy',
+    },
+    {
+      title: 'Son Değişiklik',
+      dataIndex: 'updatedBy',
+    },
+    {
+      title: 'Giriş Tarihi',
+      dataIndex: 'createDate',
+    },
+    {
+      title: 'Açıklama',
+      dataIndex: 'explanation',
+    },
   ];
 
   const manager_columns = [

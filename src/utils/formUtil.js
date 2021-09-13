@@ -22,6 +22,8 @@ const FORM_ITEM_LAYOUT = {
     },
   };
 
+  function financial(x) {
+    return Number.parseFloat(x).toFixed(2);
+  }
 
-
-export { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT };
+export { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT, financial };

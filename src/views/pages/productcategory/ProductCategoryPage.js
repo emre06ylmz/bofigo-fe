@@ -135,13 +135,13 @@ export default function ProductCategoryPage(props) {
   return (
     <React.Fragment>
       <Button type="primary" onClick={onPostClick}>
-        Hammadde Kategori Ekle
+      Ürün Kategori Ekle
       </Button>
       <Table loading={loading} dataSource={items} columns={manager_columns} />
       {modalInfo.type === "POST" && (
         <Modal
           visible={modalInfo.visible}
-          title="Hammadde Kategori Ekleme Ekranı"
+          title="Ürün Kategori Ekleme Ekranı"
           onCancel={hideModal}
           footer={null}
         >
@@ -152,7 +152,7 @@ export default function ProductCategoryPage(props) {
       {modalInfo.type === "UPDATE" && (
         <Modal
           visible={modalInfo.visible}
-          title="Hammadde Kategori Güncelleme Ekranı"
+          title="Ürün Kategori Güncelleme Ekranı"
           onCancel={hideModal}
           footer={null}
         >
