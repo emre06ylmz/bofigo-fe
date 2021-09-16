@@ -1,5 +1,6 @@
 import React from 'react';
 import callApi from "./utils/callApi";
+import {message } from 'antd';
 
 
 const AuthenticationContext = React.createContext();
@@ -65,9 +66,10 @@ function useAuthentication(){
 
     const logout = async function(){
         try{
-            await callApi({
-                url: ""
+            const response = await callApi({
+                url: "/api/application/logout"
             });
+            message.success(response.message);
             logoutSuccess();
         }catch(ex){
             loginFail(ex);

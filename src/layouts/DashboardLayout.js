@@ -43,7 +43,7 @@ export function DashboardLayout(props) {
   //   options: { renderToStaticMarkup },
   //   defaultLanguage: "en",
   // });
-  const  { user } = useAuthentication();
+  const  { logout, user } = useAuthentication();
 
   props.addTranslationForLanguage(globalTranslations_en, "en");
   props.addTranslationForLanguage(globalTranslations_tr, "tr");
