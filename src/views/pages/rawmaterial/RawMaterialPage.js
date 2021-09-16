@@ -4,11 +4,13 @@ import { useHistory } from 'react-router-dom';
 import callApi from '../../../utils/callApi';
 import RawMaterialForm from './RawMaterialForm';
 import RawMaterialUpdateForm from './RawMaterialUpdateForm';
+import CsvCreator from 'react-csv-creator';
 
 const ENDPOINT = '/api/rawmaterial';
 
 export default function RawMaterialPage(props) {
   const [items, setItems] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   let history = useHistory();
@@ -23,32 +25,46 @@ export default function RawMaterialPage(props) {
     {
       title: 'Id',
       dataIndex: 'id',
+      display: 'Id',
+      id: 'id',
     },
     {
       title: 'Hammadde Adı',
       dataIndex: 'name',
+      display: 'Hammadde Adı',
+      id: 'name',
     },
     {
       title: 'Açıklama',
       dataIndex: 'explanation',
+      display: 'Açıklama',
+      id: 'explanation',
     },
     {
       title: 'Kategori',
       dataIndex: 'rawMaterialCategory',
+      display: 'Kategori',
+      id: 'rawMaterialCategory',
       render: rawMaterialCategory => <div>{rawMaterialCategory.name}</div>,
     },
     {
       title: 'Birim',
       dataIndex: 'unit',
+      display: 'Birim',
+      id: 'unit',
       render: unit => <div>{unit.name}</div>,
     },
     {
       title: 'Stok',
       dataIndex: 'stock',
+      display: 'Stok',
+      id: 'stock',
     },
     {
       title: 'Para Birimi',
       dataIndex: 'selectedCurrency',
+      display: 'Para Birimi',
+      id: 'selectedCurrency',
     },
   ];
 
@@ -152,6 +168,20 @@ export default function RawMaterialPage(props) {
 
       let response = await callApi({ endpoint: endPoint });
       setItems(response.data);
+      
+      setTableData(response.data.map((item) => {
+        return {
+          id: item.id,
+          name: item.name,
+          explanation: item.explanation,
+          rawMaterialCategory: item.rawMaterialCategory.name,
+          unit: item.unit.name,
+          stock: item.stock,
+          selectedCurrency: item.selectedCurrency
+        }
+      }));
+
+
     } finally {
       setLoading(false);
     }
@@ -166,6 +196,13 @@ export default function RawMaterialPage(props) {
       <Button type="primary" onClick={onPostClick}>
         Hammadde Ekle
       </Button>
+      
+      <Button type="primary" style={{marginLeft: 10}} >
+        <CsvCreator filename="rawmaterials" headers={standart_columns} rows={tableData}>
+          <p>Export</p>
+        </CsvCreator>
+      </Button>
+
       <Table loading={loading} dataSource={items} columns={manager_columns} />
       {modalInfo.type === 'POST' && (
         <Modal visible={modalInfo.visible} title="Hammadde Ekleme Ekranı" onCancel={hideModal} footer={null}>

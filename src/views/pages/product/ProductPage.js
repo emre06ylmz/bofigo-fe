@@ -17,6 +17,7 @@ import DeliveryUpdateForm from '../delivery/DeliveryUpdateForm';
 import DeliveryList from '../delivery/DeliveryPage';
 
 import { financial } from '../../../utils/formUtil';
+import CsvCreator from 'react-csv-creator';
 
 const ENDPOINT = '/api/product';
 
@@ -26,6 +27,7 @@ const styles = {
 
 export default function ProductPage(props) {
   const [items, setItems] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   let history = useHistory();
@@ -40,56 +42,80 @@ export default function ProductPage(props) {
     {
       title: 'Id',
       dataIndex: 'id',
+      display: 'Id',
+      id: 'id',
     },
     {
       title: 'Ürün Adı',
       dataIndex: 'name',
+      display: 'Ürün Adı',
+      id: 'name',
     },
     {
       title: 'Barkod',
       dataIndex: 'barcode',
+      display: 'Barkod',
+      id: 'barcode',
     },
     {
       title: 'Kategori',
       dataIndex: 'productCategory',
+      display: 'Kategori',
+      id: 'productCategory',
       render: productCategory => <div>{productCategory.name}</div>,
     },
     {
       title: 'Model Kodu',
       dataIndex: 'productModelCode',
+      display: 'Model Kodu',
+      id: 'productModelCode',
       render: productModelCode => <div>{productModelCode.name}</div>,
     },
     {
       title: 'Stok',
       dataIndex: 'stock',
+      display: 'Stok',
+      id: 'stock',
     },
     {
       title: 'Maliyet',
       dataIndex: 'cost_TL',
+      display: 'Maliyet',
+      id: 'cost_TL',
       render: (cost_TL, item) => <div>{item.cost_TL} TL</div>,
     },
     {
       title: '%5 Fireli Maliyet',
       dataIndex: 'cost_TL',
+      display: '%5 Fireli Maliyet',
+      id: 'cost_Plus',
       render: (cost_TL, item) => <div>{item.cost_Plus} TL</div>,
     },
     {
       title: 'KDV',
       dataIndex: 'tax',
+      display: 'KDV',
+      id: 'tax',
     },
     {
       title: 'Fireli KDV Dahil Maliyet',
       dataIndex: 'cost_TL',
+      display: 'Fireli KDV Dahil Maliyet',
+      id: 'cost_PlusTax',
       render: (cost_TL, item) => <div>{financial(item.cost_PlusTax)} TL</div>,
     },
     {
       title: 'Kargo',
       dataIndex: 'cargo',
+      display: 'Kargo',
+      id: 'cargo',
       render: (cargo, item) => <div>{financial(item.cargo)} TL</div>,
     },
     {
       title: 'Toplam Maliyet',
       dataIndex: 'cost_TL',
+      display: 'Toplam Maliyet',
+      id: 'cost_Total',
       render: (cost_TL, item) => <div>{financial(item.cost_Total)} TL</div>,
     },
   ];
@@ -276,6 +302,25 @@ export default function ProductPage(props) {
       setLoading(true);
       let response = await callApi({ endpoint: ENDPOINT });
       setItems(response.data);
+
+      setTableData(
+        response.data.map(item => {
+          return {
+            id: item.id,
+            name: item.name,
+            barcode: item.barcode,
+            productCategory: item.productCategory.name,
+            productModelCode: item.productModelCode.name,
+            stock: item.stock,
+            cost_TL: item.cost_TL,
+            cost_Plus: item.cost_Plus,
+            tax: item.tax,
+            cost_PlusTax: item.cost_PlusTax,
+            cargo: item.cargo,
+            cost_Total: item.cost_Total,
+          };
+        })
+      );
     } finally {
       setLoading(false);
     }
@@ -292,6 +337,12 @@ export default function ProductPage(props) {
       </Button>
       <Button type="secondary" onClick={onCalculateClick} style={styles}>
         Maliyetleri Hesapla
+      </Button>
+
+      <Button type="primary" style={{ marginLeft: 10 }}>
+        <CsvCreator filename="products" headers={standart_columns} rows={tableData}>
+          <p>Export</p>
+        </CsvCreator>
       </Button>
       <Table loading={loading} dataSource={items} columns={manager_columns} />
       {modalInfo.type === 'POST' && (

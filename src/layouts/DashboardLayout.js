@@ -87,6 +87,12 @@ export function DashboardLayout(props) {
     setShowChat1(false);
   }
 
+  function logoutUser() {
+    document.cookie = "BOFIGO_JWT_TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log("logout");
+    logout();
+  }
+
   const sidebarCollapsedClass = sidebarCollapsed ? "side-menu-collapsed" : "";
 
   return (
@@ -118,7 +124,7 @@ export function DashboardLayout(props) {
                   <DropdownMenu right>
                     <DropdownItem>Profile</DropdownItem>
                     <DropdownItem divider />
-                    <DropdownItem>Logout</DropdownItem>
+                    <DropdownItem onClick={logoutUser}>Logout</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </React.Fragment>

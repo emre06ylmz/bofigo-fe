@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Form, Input, Select, Button, message, Popconfirm, Table } from 'antd';
 import callApi from '../../../utils/callApi';
 import { Fragment } from 'react';
-import { ENDPOINT as ENDPOINT_RAWMATERIAL } from '../rawmaterial/RawMaterialPage';
+
+import CsvCreator from 'react-csv-creator';
 
 const { Option } = Select;
 
@@ -10,41 +11,53 @@ const ENDPOINT = '/api/delivery';
 
 export default function ProductionPage(props) {
   const form = useRef(null);
-  const [operationType, setOperationType] = useState(['ADD']);
   const [items, setItems] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [rawMaterialCategoryList, setRawMaterialCategoryList] = useState([]);
-  const [rawMaterialList, setRawMaterialList] = useState([]);
 
   const standart_columns = [
     {
       title: 'Id',
       dataIndex: 'id',
+      id: 'id',
+      display: 'Id',
     },
     {
       title: 'Ürün',
       dataIndex: 'product',
+      id: 'product',
+      display: 'Ürün',
       render: product => <div>{product.name}</div>,
     },
     {
       title: 'Miktar',
       dataIndex: 'count',
+      id: 'count',
+      display: 'Miktar',
     },
     {
       title: 'Giriş Yapan',
       dataIndex: 'createdBy',
+      id: 'createdBy',
+      display: 'Giriş Yapan',
     },
     {
       title: 'Son Değişiklik',
       dataIndex: 'updatedBy',
+      id: 'updatedBy',
+      display: 'Son Değişiklik',
     },
     {
       title: 'Giriş Tarihi',
       dataIndex: 'createDate',
+      id: 'createDate',
+      display: 'Giriş Tarihi',
     },
     {
       title: 'Açıklama',
       dataIndex: 'explanation',
+      id: 'explanation',
+      display: 'Açıklama',
     },
   ];
 
@@ -84,10 +97,24 @@ export default function ProductionPage(props) {
   async function getData() {
     try {
       setLoading(true);
-  
+
       const { id } = props.data;
       let productionResponse = await callApi({ endpoint: ENDPOINT + '/listByProductId/' + id });
       setItems(productionResponse.data);
+
+      setTableData(
+        productionResponse.data.map(item => {
+          return {
+            id: item.id,
+            product: item.product.name,
+            count: item.count,
+            createdBy: item.createdBy,
+            updatedBy: item.updatedBy,
+            createDate: item.createDate,
+            explanation: item.explanation,
+          };
+        })
+      );
     } finally {
       setLoading(false);
     }
@@ -111,7 +138,7 @@ export default function ProductionPage(props) {
       //message.error(error.messages);
     }
   }
-  
+
   function onPostClick() {
     props.onPostClick();
   }
@@ -149,6 +176,12 @@ export default function ProductionPage(props) {
     <Fragment>
       <Button type="primary" onClick={onPostClick}>
         Sevkiyat Ekle
+      </Button>
+
+      <Button type="primary" style={{ marginLeft: 10 }}>
+        <CsvCreator filename="deliveries" headers={standart_columns} rows={tableData}>
+          <p>Export</p>
+        </CsvCreator>
       </Button>
       <Table loading={loading} dataSource={items} columns={manager_columns} />
     </Fragment>

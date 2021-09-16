@@ -52,6 +52,12 @@ function useAuthentication(){
                 method: "POST",
                 body: data
             });
+
+            if(response.status == "FAILURE"){
+                message.error(response.message);
+                return;
+            }
+
             if(response && response.username){
                 loginSuccess(response);
             }
