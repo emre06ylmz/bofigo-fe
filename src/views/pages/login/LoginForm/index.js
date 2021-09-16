@@ -16,6 +16,7 @@ export default function LoginForm(){
     const { login, loggingIn, isAuthenticated } = useAuthentication();
 
     const onFinish = values => {
+        console.log(values);
         login(values);
     };
     
@@ -39,7 +40,7 @@ export default function LoginForm(){
                 >
                     <Form.Item
                         label="Kullanıcı"
-                        name="name"
+                        name="username"
                         rules={[{ required: true, message: 'Kullanıcı adı giriniz!' }]}
                     >
                         <Input />

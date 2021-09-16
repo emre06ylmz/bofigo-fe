@@ -47,7 +47,7 @@ function useAuthentication(){
         loginStart();
         try{
             const response = await callApi({
-                endpoint: "/api/application/login",
+                endpoint: "/api/application/login?username=" + data.username.trim() + "&password="+data.password.trim(),
                 method: "POST",
                 body: data
             });
