@@ -81,30 +81,30 @@ export default function ProductPage(props) {
       dataIndex: 'stock',
       display: 'Stok',
       id: 'stock',
-      sorter: (a, b) => {return a.stock.localeCompare(b.stock)},
+      sorter: (a, b) => a.stock - b.stock,
     },
     {
       title: 'Maliyet',
       dataIndex: 'cost_TL',
       display: 'Maliyet',
       id: 'cost_TL',
-      render: (cost_TL, item) => <div>{item.cost_TL} TL</div>,
-      sorter: (a, b) => {return a.cost_TL.localeCompare(b.cost_TL)},
+      render: (cost_TL, item) => <div>{financial(item.cost_TL)} TL</div>,
+      sorter: (a, b) => a.cost_TL - b.cost_TL,
     },
     {
       title: '%5 Fireli Maliyet',
       dataIndex: 'cost_TL',
       display: '%5 Fireli Maliyet',
       id: 'cost_Plus',
-      render: (cost_TL, item) => <div>{item.cost_Plus} TL</div>,
-      sorter: (a, b) => {return a.cost_Plus.localeCompare(b.cost_Plus)},
+      render: (cost_TL, item) => <div>{financial(item.cost_Plus)} TL</div>,
+      sorter: (a, b) => a.cost_Plus - b.cost_Plus,
     },
     {
       title: 'KDV',
       dataIndex: 'tax',
       display: 'KDV',
       id: 'tax',
-      sorter: (a, b) => {return a.tax.localeCompare(b.tax)},
+      sorter: (a, b) => a.tax - b.tax,
     },
     {
       title: 'Fireli KDV Dahil Maliyet',
@@ -112,7 +112,7 @@ export default function ProductPage(props) {
       display: 'Fireli KDV Dahil Maliyet',
       id: 'cost_PlusTax',
       render: (cost_TL, item) => <div>{financial(item.cost_PlusTax)} TL</div>,
-      sorter: (a, b) => {return a.cost_PlusTax.localeCompare(b.cost_PlusTax)},
+      sorter: (a, b) => a.cost_PlusTax - b.cost_PlusTax,
     },
     {
       title: 'Kargo',
@@ -120,7 +120,7 @@ export default function ProductPage(props) {
       display: 'Kargo',
       id: 'cargo',
       render: (cargo, item) => <div>{financial(item.cargo)} TL</div>,
-      sorter: (a, b) => {return a.cargo.localeCompare(b.cargo)},
+      sorter: (a, b) => a.cargo - b.cargo,
     },
     {
       title: 'Toplam Maliyet',
@@ -129,6 +129,7 @@ export default function ProductPage(props) {
       id: 'cost_Total',
       render: (cost_TL, item) => <div>{financial(item.cost_Total)} TL</div>,
       sorter: (a, b) => {return a.cost_Total.localeCompare(b.cost_Total)},
+      sorter: (a, b) => a.cost_Total - b.cost_Total,
     },
   ];
 
@@ -139,29 +140,19 @@ export default function ProductPage(props) {
       dataIndex: 'rawMaterial',
       key: 'x',
       render: (text, record) => (
-        <Button type="link" onClick={e => onRawMaterialClick(record, e)}>
-          Hammaddeler
-        </Button>
-      ),
-    },
-    {
-      title: '',
-      dataIndex: 'production',
-      key: 'x',
-      render: (text, record) => (
-        <Button type="link" onClick={e => onProductionClick(record, e)}>
-          Üretim
-        </Button>
-      ),
-    },
-    {
-      title: '',
-      dataIndex: 'delivery',
-      key: 'x',
-      render: (text, record) => (
-        <Button type="link" onClick={e => onDeliveryClick(record, e)}>
-          Sevkiyat
-        </Button>
+        <div>
+          <Button type="link" onClick={e => onRawMaterialClick(record, e)}>
+            Hammaddeler
+          </Button>
+          <br />
+          <Button type="link" onClick={e => onProductionClick(record, e)}>
+            Üretim
+          </Button>
+          <br />
+          <Button type="link" onClick={e => onDeliveryClick(record, e)}>
+            Sevkiyat
+          </Button>
+        </div>
       ),
     },
     {
@@ -356,7 +347,7 @@ export default function ProductPage(props) {
           <p>Export</p>
         </CsvCreator>
       </Button>
-      <Table loading={loading} dataSource={items} columns={manager_columns} />
+      <Table scroll={{ x: 1000 }} loading={loading} dataSource={items} columns={manager_columns} />
       {modalInfo.type === 'POST' && (
         <Modal visible={modalInfo.visible} title="Ürün Ekleme Ekranı" onCancel={hideModal} footer={null}>
           <ProductForm handleClose={hideModal} />
@@ -383,7 +374,7 @@ export default function ProductPage(props) {
 
       {modalInfo.type === 'MATERIALS_UPDATE' && (
         <Modal
-          width={600}
+          width={1000}
           visible={modalInfo.visible}
           title="Ürün Hammedde Güncelleme Ekranı"
           onCancel={hideModal}
@@ -394,7 +385,7 @@ export default function ProductPage(props) {
       )}
 
       {modalInfo.type === 'MATERIALS' && (
-        <Modal width={600} visible={modalInfo.visible} title="Ürün Hammedde Listesi" onCancel={hideModal} footer={null}>
+        <Modal width={1000} visible={modalInfo.visible} title="Ürün Hammedde Listesi" onCancel={hideModal} footer={null}>
           <ProductRawMaterialList
             onUpdateClick={onUpdateMaterialClick}
             onPostClick={onPostMaterialClick}
@@ -405,14 +396,14 @@ export default function ProductPage(props) {
       )}
 
       {modalInfo.type === 'PRODUCTIONS_POST' && (
-        <Modal width={600} visible={modalInfo.visible} title="Üretim Ekleme Ekranı" onCancel={hideModal} footer={null}>
+        <Modal width={1000} visible={modalInfo.visible} title="Üretim Ekleme Ekranı" onCancel={hideModal} footer={null}>
           <ProductionForm data={modalInfo.selected} handleClose={hideModal} />
         </Modal>
       )}
 
       {modalInfo.type === 'DELIVERIES_POST' && (
         <Modal
-          width={600}
+          width={1000}
           visible={modalInfo.visible}
           title="Sevkiyat Ekleme Ekranı"
           onCancel={hideModal}
@@ -424,7 +415,7 @@ export default function ProductPage(props) {
 
       {modalInfo.type === 'PRODUCTIONS_UPDATE' && (
         <Modal
-          width={600}
+          width={1000}
           visible={modalInfo.visible}
           title="Üretim Güncelleme Ekranı"
           onCancel={hideModal}
@@ -436,7 +427,7 @@ export default function ProductPage(props) {
 
       {modalInfo.type === 'DELIVERIES_UPDATE' && (
         <Modal
-          width={600}
+          width={1000}
           visible={modalInfo.visible}
           title="Sevkiyar Güncelleme Ekranı"
           onCancel={hideModal}

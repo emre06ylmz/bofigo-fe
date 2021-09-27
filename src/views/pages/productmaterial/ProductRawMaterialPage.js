@@ -40,6 +40,12 @@ export default function ProductRawMaterialList(props) {
       dataIndex: 'amount',
       sorter: (a, b) => a.amount - b.amount,
     },
+    {
+      title: 'Son Fiyat',
+      dataIndex: 'lastPrice',
+      render: rawMaterial => <div>{rawMaterial.lastPrice}</div>,
+      sorter: (a, b) => a.rawMaterial.lastPrice - b.rawMaterial.lastPrice,
+    },
   ];
 
   const manager_columns = [
