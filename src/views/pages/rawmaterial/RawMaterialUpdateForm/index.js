@@ -106,6 +106,10 @@ export default function RawMaterialUpdateForm(props) {
         <Input disabled />
       </Form.Item>
 
+      <Form.Item name="lastPrice" label="Son Fiyat">
+        <Input disabled />
+      </Form.Item>
+
       <Form.Item name="selectedCurrency" label="Para Birimi">
         <Select>
           <Option value="TL">TL</Option>

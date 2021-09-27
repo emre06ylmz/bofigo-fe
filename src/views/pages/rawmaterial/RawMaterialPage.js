@@ -72,6 +72,11 @@ export default function RawMaterialPage(props) {
       id: 'selectedCurrency',
       sorter: (a, b) => {return a.selectedCurrency.localeCompare(b.selectedCurrency)},
     },
+    {
+      title: 'Son Fiyat',
+      dataIndex: 'lastPrice',
+      sorter: (a, b) => a.lastPrice - b.lastPrice,
+    },
   ];
 
   const manager_columns = [

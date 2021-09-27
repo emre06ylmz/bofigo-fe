@@ -47,6 +47,7 @@ export default function RawMaterialForm(props) {
 
   async function onFinish(values) {
     values.stock = 0;
+    values.lastPrice = 0;
     debugger;
     try {
       let response = await callApi({
