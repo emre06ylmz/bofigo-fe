@@ -28,6 +28,7 @@ export default function PurchasePage(props) {
       dataIndex: 'id',
       id: 'id',
       display: 'Id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Hammadde',
@@ -35,6 +36,7 @@ export default function PurchasePage(props) {
       id: 'rawMaterial',
       display: 'Hammadde',
       render: rawMaterial => <div>{rawMaterial.name}</div>,
+      sorter: (a, b) => {return a.rawMaterial.name.localeCompare(b.rawMaterial.name)},
     },
     {
       title: 'Tedarikçi',
@@ -42,18 +44,21 @@ export default function PurchasePage(props) {
       id: 'supplier',
       display: 'Tedarikçi',
       render: supplier => <div>{supplier.name}</div>,
+      sorter: (a, b) => {return a.supplier.name.localeCompare(b.supplier.name)},
     },
     {
       title: 'Fiyat',
       dataIndex: 'price',
       id: 'price',
       display: 'Fiyat',
+      sorter: (a, b) => a.price - b.price,
     },
     {
       title: 'Miktar',
       dataIndex: 'amount',
       id: 'amount',
       display: 'Miktar',
+      sorter: (a, b) => a.amount - b.amount,
     },
     {
       title: 'Açıklama',

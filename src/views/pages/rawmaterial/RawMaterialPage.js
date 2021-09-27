@@ -27,12 +27,14 @@ export default function RawMaterialPage(props) {
       dataIndex: 'id',
       display: 'Id',
       id: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Hammadde Adı',
       dataIndex: 'name',
       display: 'Hammadde Adı',
       id: 'name',
+      sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
     {
       title: 'Açıklama',
@@ -46,6 +48,7 @@ export default function RawMaterialPage(props) {
       display: 'Kategori',
       id: 'rawMaterialCategory',
       render: rawMaterialCategory => <div>{rawMaterialCategory.name}</div>,
+      sorter: (a, b) => {return a.rawMaterialCategory.name.localeCompare(b.rawMaterialCategory.name)},
     },
     {
       title: 'Birim',
@@ -53,18 +56,21 @@ export default function RawMaterialPage(props) {
       display: 'Birim',
       id: 'unit',
       render: unit => <div>{unit.name}</div>,
+      sorter: (a, b) => {return a.unit.localeCompare(b.unit)},
     },
     {
       title: 'Stok',
       dataIndex: 'stock',
       display: 'Stok',
       id: 'stock',
+      sorter: (a, b) => a.stock - b.stock,
     },
     {
       title: 'Para Birimi',
       dataIndex: 'selectedCurrency',
       display: 'Para Birimi',
       id: 'selectedCurrency',
+      sorter: (a, b) => {return a.selectedCurrency.localeCompare(b.selectedCurrency)},
     },
   ];
 

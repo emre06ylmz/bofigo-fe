@@ -24,12 +24,14 @@ export default function SupplierPage(props) {
       dataIndex: 'id',
       display: 'Id',
       id: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Birim Adı',
       dataIndex: 'name',
       display: 'Birim Adı',
       id: 'name',
+      sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
     {
       title: 'Açıklama',

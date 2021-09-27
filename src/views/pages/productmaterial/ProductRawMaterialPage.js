@@ -21,20 +21,24 @@ export default function ProductRawMaterialList(props) {
     {
       title: 'Id',
       dataIndex: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Hammadde Kategori',
       dataIndex: 'rawMaterialCategory',
       render: rawMaterialCategory => <div>{rawMaterialCategory.name}</div>,
+      sorter: (a, b) => {return a.rawMaterialCategory.name.localeCompare(b.rawMaterialCategory.name)},
     },
     {
       title: 'Hammadde',
       dataIndex: 'rawMaterial',
       render: rawMaterial => <div>{rawMaterial.name}</div>,
+      sorter: (a, b) => {return a.rawMaterial.name.localeCompare(b.rawMaterial.name)},
     },
     {
       title: 'Miktar',
       dataIndex: 'amount',
+      sorter: (a, b) => a.amount - b.amount,
     },
   ];
 

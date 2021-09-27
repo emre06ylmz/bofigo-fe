@@ -44,18 +44,21 @@ export default function ProductPage(props) {
       dataIndex: 'id',
       display: 'Id',
       id: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Ürün Adı',
       dataIndex: 'name',
       display: 'Ürün Adı',
       id: 'name',
+      sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
     {
       title: 'Barkod',
       dataIndex: 'barcode',
       display: 'Barkod',
       id: 'barcode',
+      sorter: (a, b) => {return a.barcode.localeCompare(b.barcode)},
     },
     {
       title: 'Kategori',
@@ -63,6 +66,7 @@ export default function ProductPage(props) {
       display: 'Kategori',
       id: 'productCategory',
       render: productCategory => <div>{productCategory.name}</div>,
+      sorter: (a, b) => {return a.productCategory.name.localeCompare(b.productCategory.name)},
     },
     {
       title: 'Model Kodu',
@@ -70,12 +74,14 @@ export default function ProductPage(props) {
       display: 'Model Kodu',
       id: 'productModelCode',
       render: productModelCode => <div>{productModelCode.name}</div>,
+      sorter: (a, b) => {return a.productModelCode.name.localeCompare(b.productModelCode.name)},
     },
     {
       title: 'Stok',
       dataIndex: 'stock',
       display: 'Stok',
       id: 'stock',
+      sorter: (a, b) => {return a.stock.localeCompare(b.stock)},
     },
     {
       title: 'Maliyet',
@@ -83,6 +89,7 @@ export default function ProductPage(props) {
       display: 'Maliyet',
       id: 'cost_TL',
       render: (cost_TL, item) => <div>{item.cost_TL} TL</div>,
+      sorter: (a, b) => {return a.cost_TL.localeCompare(b.cost_TL)},
     },
     {
       title: '%5 Fireli Maliyet',
@@ -90,12 +97,14 @@ export default function ProductPage(props) {
       display: '%5 Fireli Maliyet',
       id: 'cost_Plus',
       render: (cost_TL, item) => <div>{item.cost_Plus} TL</div>,
+      sorter: (a, b) => {return a.cost_Plus.localeCompare(b.cost_Plus)},
     },
     {
       title: 'KDV',
       dataIndex: 'tax',
       display: 'KDV',
       id: 'tax',
+      sorter: (a, b) => {return a.tax.localeCompare(b.tax)},
     },
     {
       title: 'Fireli KDV Dahil Maliyet',
@@ -103,6 +112,7 @@ export default function ProductPage(props) {
       display: 'Fireli KDV Dahil Maliyet',
       id: 'cost_PlusTax',
       render: (cost_TL, item) => <div>{financial(item.cost_PlusTax)} TL</div>,
+      sorter: (a, b) => {return a.cost_PlusTax.localeCompare(b.cost_PlusTax)},
     },
     {
       title: 'Kargo',
@@ -110,6 +120,7 @@ export default function ProductPage(props) {
       display: 'Kargo',
       id: 'cargo',
       render: (cargo, item) => <div>{financial(item.cargo)} TL</div>,
+      sorter: (a, b) => {return a.cargo.localeCompare(b.cargo)},
     },
     {
       title: 'Toplam Maliyet',
@@ -117,6 +128,7 @@ export default function ProductPage(props) {
       display: 'Toplam Maliyet',
       id: 'cost_Total',
       render: (cost_TL, item) => <div>{financial(item.cost_Total)} TL</div>,
+      sorter: (a, b) => {return a.cost_Total.localeCompare(b.cost_Total)},
     },
   ];
 

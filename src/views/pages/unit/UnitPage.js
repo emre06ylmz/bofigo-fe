@@ -25,12 +25,14 @@ export default function UnitPage(props) {
       display: 'Id',
       title: 'Id',
       dataIndex: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       id: 'name',
       display: 'Birim Adı',
       title: 'Birim Adı',
       dataIndex: 'name',
+      sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
     {
       id: 'explanation',

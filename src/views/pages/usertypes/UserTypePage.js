@@ -20,11 +20,13 @@ function UserTypePage(props) {
     {
       title: 'Id',
       dataIndex: "id",
+      sorter: (a, b) => a.id - b.id,
     },
 
     {
       title: 'Rol',
       dataIndex: "name",
+      sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
 
     {

@@ -25,30 +25,35 @@ export default function UserPage(props) {
       dataIndex: 'id',
       display: 'Id',
       id: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Kullanıcı Adı',
       dataIndex: 'username',
       display: 'Kullanıcı Adı',
       id: 'username',
+      sorter: (a, b) => {return a.username.localeCompare(b.username)},
     },
     {
       title: 'Ad',
       dataIndex: 'name',
       display: 'Ad',
       id: 'name',
+      sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
     {
       title: 'Soyad',
       dataIndex: 'surname',
       display: 'Soyad',
       id: 'surname',
+      sorter: (a, b) => {return a.surname.localeCompare(b.surname)},
     },
     {
       title: 'Rol',
       dataIndex: 'role',
       display: 'Rol',
       id: 'role',
+      sorter: (a, b) => {return a.role.localeCompare(b.role)},
     },
   ];
 

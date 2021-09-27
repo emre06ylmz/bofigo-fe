@@ -21,6 +21,7 @@ export default function ProductionPage(props) {
       dataIndex: 'id',
       id: 'id',
       display: 'Id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: 'Ürün',
@@ -28,30 +29,35 @@ export default function ProductionPage(props) {
       id: 'product',
       display: 'Ürün',
       render: product => <div>{product.name}</div>,
+      sorter: (a, b) => {return a.product.name.localeCompare(b.product.name)},
     },
     {
       title: 'Miktar',
       dataIndex: 'count',
       id: 'Miktar',
       display: 'count',
+      sorter: (a, b) => a.count - b.count,
     },
     {
       title: 'Giriş Yapan',
       dataIndex: 'createdBy',
       id: 'createdBy',
       display: 'Giriş Yapan',
+      sorter: (a, b) => {return a.createdBy.localeCompare(b.createdBy)},
     },
     {
       title: 'Son Değişiklik',
       dataIndex: 'updatedBy',
       id: 'updatedBy',
       display: 'Son Değişiklik',
+      sorter: (a, b) => {return a.updatedBy.localeCompare(b.updatedBy)},
     },
     {
       title: 'Giriş Tarihi',
       dataIndex: 'createDate',
       id: 'createDate',
       display: 'Giriş Tarihi',
+      sorter: (a, b) => {return a.createDate.localeCompare(b.createDate)},
     },
     {
       title: 'Açıklama',

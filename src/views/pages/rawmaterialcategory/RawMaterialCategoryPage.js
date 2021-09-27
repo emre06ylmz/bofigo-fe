@@ -28,12 +28,14 @@ export default function RawMaterialCategoryPage(props) {
       id: 'id',
       title: 'Id',
       dataIndex: 'id',
+      sorter: (a, b) => a.id - b.id,
     },
     {
       display: 'Kategori Adı',
       id: 'name',
       title: 'Kategori Adı',
       dataIndex: 'name',
+      sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
     {
       display: 'Açıklama',
