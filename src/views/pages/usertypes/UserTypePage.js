@@ -59,3 +59,5 @@ function UserTypePage(props) {
   );
 }
 export default withLocalize(UserTypePage);
+
+export { ENDPOINT };

@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { Form, Input, Select, Button, message } from "antd";
 import callApi from "../../../../utils/callApi";
 import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../../utils/formUtil';
+import { ENDPOINT } from '../UserPage';
+import { ENDPOINT as ENDPOINT_USERTYPE } from '../../usertypes/UserTypePage';
 
 const { Option } = Select;
 
 export default function UserUpdateForm(props) {
   const form = useRef(null);
-  const [userTypeList, setUserTypeList] = useState([]);
+  const [roleList, setRoleList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   function setFormValues(data) {
     form.current.resetFields();
@@ -15,17 +18,17 @@ export default function UserUpdateForm(props) {
   }
 
   useEffect(() => {
-    getUserTypes();
+    getData();
     setFormValues(props.data);
   }, []);
 
-  async function getUserTypes() {
-    let response = await callApi({
-      endpoint: `/api/usertypes`,
-      method: "GET"
-    });
-    if (response) {
-      setUserTypeList(response);
+  async function getData() {
+    try {
+      setLoading(true);
+      let roleResponse = await callApi({ endpoint: ENDPOINT_USERTYPE });
+      setRoleList(roleResponse.data);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -33,7 +36,7 @@ export default function UserUpdateForm(props) {
     try {
       const { id } = props.data;
       let response = await callApi({
-        endpoint: `/api/users/${id}`,
+        endpoint: `${ENDPOINT}/${id}`,
         method: "PUT",
         body: values
       });
@@ -46,95 +49,94 @@ export default function UserUpdateForm(props) {
     }
   }
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="90">+90</Option>
-      </Select>
-    </Form.Item>
-  );
-
   return (
     <Form
-      {...FORM_ITEM_LAYOUT}
-      ref={form}
-      name="register"
-      onFinish={onFinish}
-      scrollToFirstError
+    {...FORM_ITEM_LAYOUT}
+    ref={form}
+    name="register"
+    onFinish={onFinish}
+    scrollToFirstError
+  >
+    <Form.Item
+      name="username"
+      label="Username"
+      rules={[
+        {
+          type: "email",
+          message: "The input is not valid E-mail!"
+        },
+        {
+          required: true,
+          message: "Please input your Username!"
+        }
+      ]}
     >
-      <Form.Item
-        name="firstName"
-        label="First Name"
-        rules={[
-          {
-            required: true,
-            message: "Please input your FirstName!"
-          }
-        ]}
-      >
-        <Input />
-      </Form.Item>
+      <Input />
+    </Form.Item>
 
-      <Form.Item
-        name="lastName"
-        label="Last Name"
-        rules={[
-          {
-            required: true,
-            message: "Please input your LastName!"
-          }
-        ]}
-      >
-        <Input />
-      </Form.Item>
+    <Form.Item
+      name="name"
+      label="Name"
+      rules={[
+        {
+          required: true,
+          message: "Please input your Name!"
+        }
+      ]}
+    >
+      <Input />
+    </Form.Item>
 
-      <Form.Item
-        name="email"
-        label="E-mail"
-        rules={[
-          {
-            type: "email",
-            message: "The input is not valid E-mail!"
-          },
-          {
-            required: true,
-            message: "Please input your E-mail!"
-          }
-        ]}
-      >
-        <Input />
-      </Form.Item>
+    <Form.Item
+      name="surname"
+      label="Surname"
+      rules={[
+        {
+          required: true,
+          message: "Please input your Surname"
+        }
+      ]}
+    >
+      <Input />
+    </Form.Item>
 
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[{ required: true, message: "Please input your phone number!" }]}
-      >
-        <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
-      </Form.Item>
+    <Form.Item
+      name="password"
+      label="Şifre"
+      dependencies={["password"]}
+      hasFeedback
+      rules={[
+        {
+          required: true,
+          message: "Please confirm your password!"
+        }
+      ]}
+    >
+      <Input.Password />
+    </Form.Item>
 
-      <Form.Item
-        name="userTypeId"
-        label="User Type"
-        rules={[
-          {
-            required: true,
-            message: "Please select your User Type!"
-          }
-        ]}
-      >
-        <Select defaultValue={props.data.userType.id}>
-          {userTypeList.map(item => (
-            <Option value={item.id}> {item.name}</Option>
-          ))}
-        </Select>
-      </Form.Item>
+    <Form.Item
+      name="role"
+      label="Rol"
+      rules={[
+        {
+          required: true,
+          message: "Please select your User Role"
+        }
+      ]}
+    >
+      <Select>
+        {roleList.map((item, index) => {
+          return <Option value={item.id}>{item.name}</Option>;
+        })}
+      </Select>
+    </Form.Item>
 
-      <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
-        <Button type="primary" htmlType="submit">
-          Register
-        </Button>
-      </Form.Item>
-    </Form>
+    <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
+      <Button type="primary" htmlType="submit">
+        Register
+      </Button>
+    </Form.Item>
+  </Form>
   );
 }
