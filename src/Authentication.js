@@ -73,8 +73,9 @@ function useAuthentication(){
     const logout = async function(){
         try{
             const response = await callApi({
-                url: "/api/application/logout"
+                endpoint: "/api/application/logout"
             });
+
             message.success(response.message);
             logoutSuccess();
         }catch(ex){

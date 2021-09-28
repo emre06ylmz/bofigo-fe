@@ -42,7 +42,7 @@ export default function ProductRawMaterialList(props) {
     },
     {
       title: 'Son Fiyat',
-      dataIndex: 'lastPrice',
+      dataIndex: 'rawMaterial',
       render: rawMaterial => <div>{rawMaterial.lastPrice}</div>,
       sorter: (a, b) => a.rawMaterial.lastPrice - b.rawMaterial.lastPrice,
     },

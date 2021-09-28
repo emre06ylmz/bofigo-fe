@@ -124,7 +124,7 @@ export function DashboardLayout(props) {
                   <DropdownMenu right>
                     <DropdownItem>Profile</DropdownItem>
                     <DropdownItem divider />
-                    
+                    <DropdownItem onClick={logoutUser}>Logout</DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </React.Fragment>
