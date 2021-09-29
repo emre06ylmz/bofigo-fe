@@ -53,7 +53,7 @@ export default function ProductCategoryPage(props) {
       key: 'x',
       render: (text, record) => (
         <Button type="primary" onClick={e => onProductClick(record, e)}>
-          Hammaddeler
+          üRÜNLER
         </Button>
       ),
     },
@@ -105,7 +105,7 @@ export default function ProductCategoryPage(props) {
 
   function onProductClick(record, event) {
     event.preventDefault();
-    history.push(`/pages/rawmaterial/${record.id}`);
+    history.push(`/pages/product/${record.id}`);
   }
 
   function hideModal(e) {

@@ -303,7 +303,17 @@ export default function ProductPage(props) {
   async function getData() {
     try {
       setLoading(true);
-      let response = await callApi({ endpoint: ENDPOINT });
+
+      let url = window.location.href;
+      const rawMaterialCategoryId = url.substring(url.lastIndexOf('/') + 1);
+
+      let endPoint = ENDPOINT;
+
+      if (!isNaN(rawMaterialCategoryId)) {
+        endPoint = ENDPOINT + '/listByCategoryId/' + rawMaterialCategoryId;
+      }
+
+      let response = await callApi({ endpoint: endPoint });
       setItems(response.data);
 
       setTableData(
