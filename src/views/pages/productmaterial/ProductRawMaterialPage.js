@@ -4,6 +4,7 @@ import callApi from '../../../utils/callApi';
 import { Fragment } from 'react';
 import { ENDPOINT as ENDPOINT_RAWMATERIALCATEGORY } from '../rawmaterialcategory/RawMaterialCategoryPage';
 import { ENDPOINT as ENDPOINT_RAWMATERIAL } from '../rawmaterial/RawMaterialPage';
+import { financial } from '../../../utils/formUtil';
 
 const { Option } = Select;
 
@@ -45,6 +46,12 @@ export default function ProductRawMaterialList(props) {
       dataIndex: 'rawMaterial',
       render: rawMaterial => <div>{rawMaterial.lastPrice}</div>,
       sorter: (a, b) => a.rawMaterial.lastPrice - b.rawMaterial.lastPrice,
+    },
+    {
+      title: 'Toplam',
+      dataIndex: 'rawMaterial',
+      render: (text, record, index) => <div>{financial (record.amount * record.rawMaterial.lastPrice) + " " + record.rawMaterial.selectedCurrency} </div>,
+      sorter: (a, b) => (a.amount * a.rawMaterial.lastPrice) - (b.amount * b.rawMaterial.lastPrice),
     },
   ];
 
@@ -168,7 +175,7 @@ export default function ProductRawMaterialList(props) {
       <Button type="primary" onClick={onPostClick}>
         Ürün Hammadde Ekle
       </Button>
-      <Table loading={loading} dataSource={items} columns={manager_columns} />
+      <Table loading={loading} dataSource={items} columns={manager_columns} pagination={{ pageSize: 20 }}  />
     </Fragment>
   );
 }

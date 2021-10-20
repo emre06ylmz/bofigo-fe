@@ -62,22 +62,10 @@ export default function ProductPage(props) {
           >
             Search
           </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
             Reset
           </Button>
-          <Button
-            type="link"
-            size="small"
-            onClick={() => {
-              confirm({ closeDropdown: false });
-              this.setState({
-                searchText: selectedKeys[0],
-                searchedColumn: dataIndex,
-              });
-            }}
-          >
-            Filter
-          </Button>
+
         </Space>
       </div>
     ),
@@ -132,6 +120,7 @@ export default function ProductPage(props) {
       display: 'Barkod',
       id: 'barcode',
       sorter: (a, b) => {return a.barcode.localeCompare(b.barcode)},
+      ...getColumnSearchProps('barcode'),
     },
     {
       title: 'Kategori',
@@ -441,7 +430,7 @@ export default function ProductPage(props) {
           <p>Export</p>
         </CsvCreator>
       </Button>
-      <Table scroll={{ x: 1000 }} loading={loading} dataSource={items} columns={manager_columns} />
+      <Table scroll={{ x: 1000 }} loading={loading} dataSource={items} columns={manager_columns}  pagination={{ pageSize: 20 }} />
       {modalInfo.type === 'POST' && (
         <Modal visible={modalInfo.visible} title="Ürün Ekleme Ekranı" onCancel={hideModal} footer={null}>
           <ProductForm handleClose={hideModal} />
