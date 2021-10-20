@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Form, Input, Select, Button, message } from 'antd';
 import callApi from '../../../../utils/callApi';
-import { ENDPOINT } from '../ProductPage';
+import { ENDPOINT } from '../ProductSalePage';
 import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../../utils/formUtil';
 import { ENDPOINT as ENDPOINT_PRODUCTCATEGORY } from '../../productcategory/ProductCategoryPage';
 import { ENDPOINT as ENDPOINT_PRODUCTMODELCODE } from '../../productmodelcode/ProductModelCodePage';
@@ -112,18 +112,6 @@ export default function ProductUpdateForm(props) {
         ]}
       >
         <Input />
-      </Form.Item>
-      <Form.Item
-        name="sale"
-        label="Satış Rakamı"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Sale!',
-          },
-        ]}
-      >
-        <Input/>
       </Form.Item>
       <Form.Item
         name="cargo"

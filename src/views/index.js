@@ -27,6 +27,7 @@ import PurchasePage from "./pages/purchase/PurchasePage";
 import ProductCategoryPage from "./pages/productcategory/ProductCategoryPage";
 import ProductModelCodePage from "./pages/productmodelcode/ProductModelCodePage";
 import ProductPage from "./pages/product/ProductPage";
+import ProductSalePage from "./pages/productSale/ProductSalePage";
 import ProductionPage from "./pages/production/ProducionPage";
 import DeliveryPage from "./pages/delivery/DeliveryPage";
 
@@ -66,6 +67,11 @@ const pageList = [
     name: "Ürün Listesi",
     path: "/pages/product",
     component: ProductPage
+  },
+  {
+    name: "Ürün Satış Listesi",
+    path: "/pages/productsale",
+    component: ProductSalePage
   },
   {
     name: "Ürün Kategori Listesi",

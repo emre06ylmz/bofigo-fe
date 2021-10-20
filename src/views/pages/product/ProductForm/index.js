@@ -107,6 +107,18 @@ export default function ProductForm(props) {
         <Input />
       </Form.Item>
       <Form.Item
+        name="sale"
+        label="Satış Rakamı"
+        rules={[
+          {
+            required: true,
+            message: 'Please input Sale!',
+          },
+        ]}
+      >
+        <Input defaultValue="0"/>
+      </Form.Item>
+      <Form.Item
         name="cargo"
         label="Kargo"
         rules={[

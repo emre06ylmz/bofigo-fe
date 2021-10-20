@@ -39,7 +39,11 @@ export default {
         {
           name: "Ürün Model Kodu Listesi",
           url: "/pages/productmodelcode",
-        }
+        },
+        {
+          name: "Ürün Satış Listesi",
+          url: "/pages/productsale",
+        },
       ],
     },
     {

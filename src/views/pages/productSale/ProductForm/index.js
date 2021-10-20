@@ -1,27 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Form, Input, Select, Button, message } from 'antd';
 import callApi from '../../../../utils/callApi';
-import { ENDPOINT } from '../ProductPage';
+import { ENDPOINT } from '../ProductSalePage';
 import { FORM_ITEM_LAYOUT, TAIL_FORM_ITEM_LAYOUT } from '../../../../utils/formUtil';
 import { ENDPOINT as ENDPOINT_PRODUCTCATEGORY } from '../../productcategory/ProductCategoryPage';
 import { ENDPOINT as ENDPOINT_PRODUCTMODELCODE } from '../../productmodelcode/ProductModelCodePage';
 
 const { Option } = Select;
 
-export default function ProductUpdateForm(props) {
+export default function ProductForm(props) {
   const form = useRef(null);
-
   const [loading, setLoading] = useState(false);
 
   const [productCategoryList, setProductCategoryList] = useState([]);
   const [productModelCodeList, setProductModelCodeList] = useState([]);
-
-  function setFormValues(data) {
-    data.productCategoryId = data.productCategory.id;
-    data.productModelCodeId = data.productModelCode.id;
-    form.current.resetFields();
-    form.current.setFieldsValue(data);
-  }
 
   async function getData() {
     try {
@@ -38,23 +30,25 @@ export default function ProductUpdateForm(props) {
 
   useEffect(() => {
     getData();
-    setFormValues(props.data);
   }, []);
 
   async function onFinish(values) {
+    values.cost_TL = 0;
+    values.cost_USD = 0;
+    values.cost_EURO = 0;
+    values.stock = 0;
     try {
-      const { id } = props.data;
       let response = await callApi({
-        endpoint: `${ENDPOINT}/${id}`,
-        method: 'PUT',
+        endpoint: ENDPOINT,
+        method: 'POST',
         body: values,
       });
       if (response) {
-        message.success('Kayıt güncelleme başarıyla tamamlandı.');
+        message.success('Kayıt işlemi başarıyla tamamlandı.');
         props.handleClose();
       }
     } catch (error) {
-      //call api katmanında handle edeilecek
+      //message.error(error && error.messages);
     }
   }
 
@@ -75,6 +69,7 @@ export default function ProductUpdateForm(props) {
           })}
         </Select>
       </Form.Item>
+
       <Form.Item
         name="name"
         label="Name"
@@ -87,7 +82,6 @@ export default function ProductUpdateForm(props) {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
         name="explanation"
         label="Açıklama"
@@ -100,7 +94,6 @@ export default function ProductUpdateForm(props) {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
         name="tax"
         label="KDV"
@@ -112,18 +105,6 @@ export default function ProductUpdateForm(props) {
         ]}
       >
         <Input />
-      </Form.Item>
-      <Form.Item
-        name="sale"
-        label="Satış Rakamı"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Sale!',
-          },
-        ]}
-      >
-        <Input/>
       </Form.Item>
       <Form.Item
         name="cargo"
@@ -149,7 +130,6 @@ export default function ProductUpdateForm(props) {
       >
         <Input />
       </Form.Item>
-
       <Form.Item
         name="stock"
         label="Stok"
