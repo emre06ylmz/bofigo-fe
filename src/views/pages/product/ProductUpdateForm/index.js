@@ -162,7 +162,17 @@ export default function ProductUpdateForm(props) {
       >
         <Input />
       </Form.Item>
-
+      <Form.Item
+        name="image"
+        label="Resim"
+        rules={[
+          {
+            message: 'Please input Image!',
+          },
+        ]}
+      >
+        <Input defaultValue=""/>
+      </Form.Item>
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
         <Button type="primary" htmlType="submit">
           Register

@@ -107,6 +107,11 @@ export default function ProductPage(props) {
       sorter: (a, b) => a.id - b.id,
     },
     {
+      title: 'image',
+      dataIndex: 'image',
+      render:  (image) => <img src={image} />
+    },
+    {
       title: 'Ürün Adı',
       dataIndex: 'name',
       display: 'Ürün Adı',
