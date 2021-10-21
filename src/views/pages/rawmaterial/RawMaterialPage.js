@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Modal, Popconfirm, Button, message } from 'antd';
+import { Table, Modal, Popconfirm, Button, message, Input, Space } from 'antd';
+
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import callApi from '../../../utils/callApi';
 import RawMaterialForm from './RawMaterialForm';
@@ -13,7 +16,63 @@ export default function RawMaterialPage(props) {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const [searchText, setSearchText] = useState([]);
+  const [searchedColumn, setSearchedColumn] = useState([]);
+
   let history = useHistory();
+
+  const getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+           // this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ marginBottom: 8, display: 'block' }}
+        />
+        <Space>
+          <Button
+            type="primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+            icon={<SearchOutlined />}
+            size="small"
+            style={{ width: 90 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+
+        </Space>
+      </div>
+    ),
+    filterIcon: filtered => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />,
+    onFilter: (value, record) =>
+      record[dataIndex]
+        ? record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+        : '',
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        //setTimeout(() => this.searchInput.select(), 100);
+      }
+    },
+    render: text =>
+      searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[searchText]}
+          autoEscape
+          textToHighlight={text ? text.toString() : ''}
+        />
+      ) : (
+        text
+      ),
+  });
 
   const [modalInfo, setModalInfo] = useState({
     visible: false,
@@ -35,6 +94,7 @@ export default function RawMaterialPage(props) {
       display: 'Hammadde Adı',
       id: 'name',
       sorter: (a, b) => {return a.name.localeCompare(b.name)},
+        ...getColumnSearchProps('name'),
     },
     {
       title: 'Açıklama',
@@ -122,6 +182,17 @@ export default function RawMaterialPage(props) {
       ),
     },
   ];
+
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+
+  const handleReset = clearFilters => {
+    clearFilters();
+    setSearchText('');
+  };
 
   async function onDeleteClick(id, event) {
     try {
