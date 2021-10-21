@@ -6,28 +6,12 @@ import { SearchOutlined } from '@ant-design/icons';
 
 import { useHistory } from 'react-router-dom';
 import callApi from '../../../utils/callApi';
-import ProductForm from './ProductForm';
-import ProductUpdateForm from './ProductUpdateForm';
-import ProductRawMaterialForm from '../productmaterial/ProductRawMaterialForm';
-import ProductRawMaterialUpdateForm from '../productmaterial/ProductRawMaterialUpdateForm';
-import ProductRawMaterialList from '../productmaterial/ProductRawMaterialPage';
-
-import ProductionForm from '../production/ProductionForm';
-import ProductionUpdateForm from '../production/ProductionUpdateForm';
-import ProductionList from '../production/ProducionPage';
-
-import DeliveryForm from '../delivery/DeliveryForm';
-import DeliveryUpdateForm from '../delivery/DeliveryUpdateForm';
-import DeliveryList from '../delivery/DeliveryPage';
+import ProductSaleUpdateForm from './ProductUpdateForm';
 
 import { financial } from '../../../utils/formUtil';
 import CsvCreator from 'react-csv-creator';
 
 const ENDPOINT = '/api/product';
-
-const styles = {
-  margin: '0 0 0 10px',
-};
 
 export default function ProductSalePage(props) {
   const [form] = Form.useForm();
@@ -473,135 +457,19 @@ export default function ProductSalePage(props) {
         </Form.Item>
       </Form>
       <br />
-      <Button type="primary" onClick={onPostClick}>
-        Ürün Ekle
-      </Button>
-      <Button type="secondary" onClick={onCalculateClick} style={styles}>
-        Maliyetleri Hesapla
-      </Button>
-
       <Button type="primary" style={{ marginLeft: 10 }}>
         <CsvCreator filename="products" headers={standart_columns} rows={tableData}>
           <p>Export</p>
         </CsvCreator>
       </Button>
       <Table scroll={{ x: 1000 }} loading={loading} dataSource={items} columns={manager_columns} />
-      {modalInfo.type === 'POST' && (
-        <Modal visible={modalInfo.visible} title="Ürün Ekleme Ekranı" onCancel={hideModal} footer={null}>
-          <ProductForm handleClose={hideModal} />
-        </Modal>
-      )}
 
       {modalInfo.type === 'UPDATE' && (
-        <Modal visible={modalInfo.visible} title="Ürün Güncelleme Ekranı" onCancel={hideModal} footer={null}>
-          <ProductUpdateForm data={modalInfo.selected} handleClose={hideModal} />
+        <Modal visible={modalInfo.visible} title="Ürün Satış Güncelleme Ekranı" onCancel={hideModal} footer={null}>
+          <ProductSaleUpdateForm data={modalInfo.selected} handleClose={hideModal} />
         </Modal>
       )}
 
-      {modalInfo.type === 'MATERIALS_POST' && (
-        <Modal
-          width={600}
-          visible={modalInfo.visible}
-          title="Ürün Hammedde Ekleme Ekranı"
-          onCancel={hideModal}
-          footer={null}
-        >
-          <ProductRawMaterialForm data={modalInfo.selected} handleClose={hideModal} />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'MATERIALS_UPDATE' && (
-        <Modal
-          width={1000}
-          visible={modalInfo.visible}
-          title="Ürün Hammedde Güncelleme Ekranı"
-          onCancel={hideModal}
-          footer={null}
-        >
-          <ProductRawMaterialUpdateForm data={modalInfo.selected} handleClose={hideModal} />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'MATERIALS' && (
-        <Modal
-          width={1000}
-          visible={modalInfo.visible}
-          title="Ürün Hammedde Listesi"
-          onCancel={hideModal}
-          footer={null}
-        >
-          <ProductRawMaterialList
-            onUpdateClick={onUpdateMaterialClick}
-            onPostClick={onPostMaterialClick}
-            data={modalInfo.selected}
-            handleClose={hideModal}
-          />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'PRODUCTIONS_POST' && (
-        <Modal width={1000} visible={modalInfo.visible} title="Üretim Ekleme Ekranı" onCancel={hideModal} footer={null}>
-          <ProductionForm data={modalInfo.selected} handleClose={hideModal} />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'DELIVERIES_POST' && (
-        <Modal
-          width={1000}
-          visible={modalInfo.visible}
-          title="Sevkiyat Ekleme Ekranı"
-          onCancel={hideModal}
-          footer={null}
-        >
-          <DeliveryForm data={modalInfo.selected} handleClose={hideModal} />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'PRODUCTIONS_UPDATE' && (
-        <Modal
-          width={1000}
-          visible={modalInfo.visible}
-          title="Üretim Güncelleme Ekranı"
-          onCancel={hideModal}
-          footer={null}
-        >
-          <ProductionUpdateForm data={modalInfo.selected} handleClose={hideModal} />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'DELIVERIES_UPDATE' && (
-        <Modal
-          width={1000}
-          visible={modalInfo.visible}
-          title="Sevkiyar Güncelleme Ekranı"
-          onCancel={hideModal}
-          footer={null}
-        >
-          <DeliveryUpdateForm data={modalInfo.selected} handleClose={hideModal} />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'PRODUCTIONS' && (
-        <Modal width={1000} visible={modalInfo.visible} title="Üretim Listesi" onCancel={hideModal} footer={null}>
-          <ProductionList
-            onUpdateClick={onUpdateProductionClick}
-            onPostClick={onPostProductionClick}
-            data={modalInfo.selected}
-            handleClose={hideModal}
-          />
-        </Modal>
-      )}
-
-      {modalInfo.type === 'DELIVERIES' && (
-        <Modal width={1000} visible={modalInfo.visible} title="Sekiyat Listesi" onCancel={hideModal} footer={null}>
-          <DeliveryList
-            onUpdateClick={onUpdateDeliveryClick}
-            onPostClick={onPostDeliveryClick}
-            data={modalInfo.selected}
-            handleClose={hideModal}
-          />
-        </Modal>
-      )}
     </React.Fragment>
   );
 }

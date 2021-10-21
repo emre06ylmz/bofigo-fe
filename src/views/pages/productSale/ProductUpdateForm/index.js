@@ -8,7 +8,7 @@ import { ENDPOINT as ENDPOINT_PRODUCTMODELCODE } from '../../productmodelcode/Pr
 
 const { Option } = Select;
 
-export default function ProductUpdateForm(props) {
+export default function ProductSaleUpdateForm(props) {
   const form = useRef(null);
 
   const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ export default function ProductUpdateForm(props) {
     try {
       const { id } = props.data;
       let response = await callApi({
-        endpoint: `${ENDPOINT}/${id}`,
+        endpoint: `${ENDPOINT}/sale/${id}`,
         method: 'PUT',
         body: values,
       });
@@ -60,91 +60,19 @@ export default function ProductUpdateForm(props) {
 
   return (
     <Form {...FORM_ITEM_LAYOUT} ref={form} name="register" onFinish={onFinish} scrollToFirstError>
-      <Form.Item name="productCategoryId" label="Ürün Kategori">
-        <Select>
-          {productCategoryList.map((item, index) => {
-            return <Option value={item.id}>{item.name}</Option>;
-          })}
-        </Select>
-      </Form.Item>
-
-      <Form.Item name="productModelCodeId" label="Model Kodu">
-        <Select>
-          {productModelCodeList.map((item, index) => {
-            return <Option value={item.id}>{item.name}</Option>;
-          })}
-        </Select>
-      </Form.Item>
       <Form.Item
         name="name"
         label="Name"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Name!',
-          },
-        ]}
       >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="explanation"
-        label="Açıklama"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Explanation!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="tax"
-        label="KDV"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Tax!',
-          },
-        ]}
-      >
-        <Input />
+        <Input disabled/>
       </Form.Item>
       <Form.Item
-        name="cargo"
-        label="Kargo"
+        name="sale"
+        label="Satış"
         rules={[
           {
             required: true,
-            message: 'Please input Kargo!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        name="barcode"
-        label="Barkod"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Barcode!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        name="stock"
-        label="Stok"
-        rules={[
-          {
-            required: true,
-            message: 'Please input Stok!',
+            message: 'Please input Sale!',
           },
         ]}
       >
@@ -153,7 +81,7 @@ export default function ProductUpdateForm(props) {
 
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
         <Button type="primary" htmlType="submit">
-          Register
+          Kaydet
         </Button>
       </Form.Item>
     </Form>
