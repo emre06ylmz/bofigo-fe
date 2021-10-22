@@ -46,7 +46,7 @@ export default function ProductModelCodeUpdateForm(props) {
     >
       <Form.Item
         name="name"
-        label="Kategori Adı"
+        label="Model Kodu Adı"
         rules={[
           {
             required: true,

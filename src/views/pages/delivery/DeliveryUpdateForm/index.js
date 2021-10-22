@@ -89,7 +89,7 @@ export default function ProductUpdateForm(props) {
 
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
         <Button type="primary" htmlType="submit">
-          Ekle/Güncelle
+        Kaydet
         </Button>
       </Form.Item>
     </Form>

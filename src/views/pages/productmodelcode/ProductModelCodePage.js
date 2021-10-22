@@ -32,8 +32,8 @@ export default function ProductModelCodePage(props) {
     },
     {
       id: 'name',
-      display: 'Birim Adı',
-      title: 'Birim Adı',
+      display: 'Model Kodu Adı',
+      title: 'Model Kodu Adı',
       dataIndex: 'name',
       sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },

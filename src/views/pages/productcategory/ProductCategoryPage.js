@@ -32,8 +32,8 @@ export default function ProductCategoryPage(props) {
     },
     {
       id: 'name',
-      display: 'Birim Adı',
-      title: 'Birim Adı',
+      display: 'Kategori Adı',
+      title: 'Kategori Adı',
       dataIndex: 'name',
       sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
