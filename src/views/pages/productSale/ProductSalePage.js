@@ -214,24 +214,18 @@ export default function ProductSalePage(props) {
 
   const calculateCommisonProfit = (sale, commission, cost) => {
     let profit = sale - (sale * commission) / 100 - cost;
-    debugger;
     return financial(profit);
   };
 
   const calculateCommisonProfitPercent = (sale, commission, cost) => {
     let profit = sale - (sale * commission) / 100 - cost;
-    return financial((100 * profit) / cost);
+    return financial((100 * profit) / sale);
   };
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
-  };
-
-  const handleReset = clearFilters => {
-    clearFilters();
-    setSearchText('');
   };
 
   async function onDeleteClick(id, event) {
@@ -249,101 +243,15 @@ export default function ProductSalePage(props) {
     }
   }
 
-  function onRawMaterialClick(record, event) {
-    setModalInfo({
-      visible: true,
-      type: 'MATERIALS',
-      selected: record,
-    });
-  }
-
-  function onProductionClick(record, event) {
-    setModalInfo({
-      visible: true,
-      type: 'PRODUCTIONS',
-      selected: record,
-    });
-  }
-
-  function onDeliveryClick(record, event) {
-    setModalInfo({
-      visible: true,
-      type: 'DELIVERIES',
-      selected: record,
-    });
-  }
-
   function hideModal(e) {
     setModalInfo({ visible: false });
     getData();
-  }
-
-  function onPostClick() {
-    setModalInfo({
-      visible: true,
-      type: 'POST',
-      selected: null,
-    });
-  }
-
-  async function onCalculateClick() {
-    let response = await callApi({ endpoint: ENDPOINT + '/calculate' });
-    getData();
-    message.success('Başarıyla güncellendi.');
   }
 
   function onUpdateClick(record, event) {
     setModalInfo({
       visible: true,
       type: 'UPDATE',
-      selected: record,
-    });
-  }
-
-  function onPostMaterialClick() {
-    setModalInfo({
-      visible: true,
-      type: 'MATERIALS_POST',
-      selected: modalInfo.selected,
-    });
-  }
-
-  function onUpdateMaterialClick(record) {
-    setModalInfo({
-      visible: true,
-      type: 'MATERIALS_UPDATE',
-      selected: record,
-    });
-  }
-
-  function onPostProductionClick() {
-    setModalInfo({
-      visible: true,
-      type: 'PRODUCTIONS_POST',
-      selected: modalInfo.selected,
-    });
-  }
-
-  function onPostDeliveryClick() {
-    setModalInfo({
-      visible: true,
-      type: 'DELIVERIES_POST',
-      selected: modalInfo.selected,
-    });
-  }
-
-  function onUpdateProductionClick(record) {
-    setModalInfo({
-      visible: true,
-      type: 'PRODUCTIONS_UPDATE',
-      selected: record,
-    });
-  }
-
-  function onUpdateDeliveryClick(record) {
-    setModalInfo({
-      visible: true,
-      type: 'DELIVERIES_UPDATE',
       selected: record,
     });
   }
@@ -452,7 +360,7 @@ export default function ProductSalePage(props) {
             max={100}
             defaultValue={commission.commission3}
             placeholder="Komisyon 3"
-            onChange={onNumberChange1}
+            onChange={onNumberChange3}
           />
         </Form.Item>
       </Form>
