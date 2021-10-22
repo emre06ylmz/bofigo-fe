@@ -85,7 +85,7 @@ export default function MenuForm(props) {
 
       <Form.Item {...TAIL_FORM_ITEM_LAYOUT}>
         <Button type="primary" htmlType="submit">
-          Register
+        Kaydet
         </Button>
       </Form.Item>
     </Form>

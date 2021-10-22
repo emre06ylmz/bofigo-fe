@@ -31,9 +31,9 @@ export default function RawMaterialCategoryPage(props) {
       sorter: (a, b) => a.id - b.id,
     },
     {
-      display: 'Kategori Adı',
+      display: 'Hammadde Kategori Adı',
       id: 'name',
-      title: 'Kategori Adı',
+      title: 'Hammadde Kategori Adı',
       dataIndex: 'name',
       sorter: (a, b) => {return a.name.localeCompare(b.name)},
     },
